@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans p-6 flex items-center justify-center min-h-screen">
+
+  <!-- 🌗 Dark Mode Toggle -->
+  <div class="absolute top-4 right-6">
+    <button onclick="toggleDarkMode()" class="text-sm bg-gray-200 dark:bg-gray-800 px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700 transition">
+      🌗 Toggle Dark Mode
+    </button>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-sm">
+    <h2 class="text-2xl font-bold mb-6 text-center text-blue-700 dark:text-blue-300">Login</h2>
+    <form method="POST" class="space-y-4">
+      <div>
+        <label class="block mb-1">Username:</label>
+        <input type="text" name="username" required class="w-full p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-black dark:text-white" />
+      </div>
+      <div>
+        <label class="block mb-1">Password:</label>
+        <input type="password" name="password" required class="w-full p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-black dark:text-white" />
+      </div>
+      <button type="submit" class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Login</button>
+    </form>
+    <div class="text-center mt-4 text-sm text-gray-600 dark:text-gray-400">
+      Don’t have an account? <a href="/register" class="text-blue-600 dark:text-blue-400 hover:underline">Register here</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>

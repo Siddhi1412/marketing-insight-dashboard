@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <title>Marketing Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: 'class' }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans p-6">
+    <!-- 🌗 Dark Mode Toggle -->
+    <div class="absolute top-4 right-6">
+        <button onclick="toggleDarkMode()" class="text-sm bg-gray-200 dark:bg-gray-800 px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700 transition">
+            🌗 Toggle Dark Mode
+        </button>
+    </div>
+
+    <div class="max-w-5xl mx-auto mt-6">
+        <h1 class="text-3xl font-bold mb-4 text-center text-blue-800 dark:text-blue-300">📊 Marketing Campaign Analysis</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
+                <p class="text-gray-500 dark:text-gray-300">Best Channel</p>
+                <p class="text-lg font-semibold text-green-600">{{ best_channel }}</p>
+                <p class="text-sm">ROI: {{ best_roi }}</p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
+                <p class="text-gray-500 dark:text-gray-300">Average ROI</p>
+                <p class="text-lg font-semibold text-blue-600">{{ avg_roi }}</p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
+                <p class="text-gray-500 dark:text-gray-300">Top CTR</p>
+                <p class="text-lg font-semibold text-purple-600">{{ top_ctr_channel }}</p>
+                <p class="text-sm">CTR: {{ top_ctr_value }}</p>
+            </div>
+        </div>
+
+        <h2 class="text-xl font-semibold mb-2">📋 Data Table</h2>
+        <div class="overflow-x-auto bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 mb-6">
+            {{ table | safe }}
+        </div>
+
+        <h2 class="text-xl font-semibold mb-2">📉 ROI by Channel</h2>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
+            <canvas id="roiChart" width="600" height="300"></canvas>
+        </div>
+
+        <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/download_excel" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">⬇️ Download Excel</a>
+            <a href="/download_pdf" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">⬇️ Download PDF</a>
+        </div>
+
+        <div class="mt-4 text-center">
+            <a href="/" class="text-blue-600 dark:text-blue-400 hover:underline">🔁 Analyze another file</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('roiChart').getContext('2d');
+        const roiChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ labels | tojson }},
+                datasets: [{
+                    label: 'ROI',
+                    data: {{ data | tojson }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</body>
+</html>

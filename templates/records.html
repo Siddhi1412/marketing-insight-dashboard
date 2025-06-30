@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <title>📄 Saved Marketing Records</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: 'class' }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 p-6 font-sans text-gray-800 dark:text-gray-100">
+    <!-- 🌗 Dark Mode Toggle -->
+    <div class="absolute top-4 right-6">
+        <button onclick="toggleDarkMode()" class="text-sm bg-gray-200 dark:bg-gray-800 px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-700 transition">
+            🌗 Toggle Dark Mode
+        </button>
+    </div>
+
+    <div class="max-w-6xl mx-auto mt-6">
+        <h1 class="text-3xl font-bold mb-6 text-center text-blue-700 dark:text-blue-300">📦 Saved Campaign Records</h1>
+
+        {% if records %}
+        <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+            <table class="w-full table-auto text-sm text-center">
+                <thead class="bg-blue-50 dark:bg-gray-700 text-blue-700 dark:text-blue-200 sticky top-0">
+                    <tr>
+                        <th class="px-3 py-2 border">#</th>
+                        <th class="px-3 py-2 border">Channel</th>
+                        <th class="px-3 py-2 border">Spend</th>
+                        <th class="px-3 py-2 border">Clicks</th>
+                        <th class="px-3 py-2 border">Impressions</th>
+                        <th class="px-3 py-2 border">Revenue</th>
+                        <th class="px-3 py-2 border">CTR</th>
+                        <th class="px-3 py-2 border">ROI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in records %}
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <td class="px-3 py-2 border">{{ r.id }}</td>
+                        <td class="px-3 py-2 border">{{ r.channel }}</td>
+                        <td class="px-3 py-2 border">{{ r.spend }}</td>
+                        <td class="px-3 py-2 border">{{ r.clicks }}</td>
+                        <td class="px-3 py-2 border">{{ r.impressions }}</td>
+                        <td class="px-3 py-2 border">{{ r.revenue }}</td>
+                        <td class="px-3 py-2 border">{{ r.ctr }}</td>
+                        <td class="px-3 py-2 border">{{ r.roi }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-center text-gray-500 dark:text-gray-400">No campaign records found yet.</p>
+        {% endif %}
+
+        <div class="mt-6 text-center">
+            <a href="/" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">🔙 Upload More Data</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</body>
+</html>

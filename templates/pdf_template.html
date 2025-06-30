@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Marketing Report PDF</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #004080;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            font-size: 13px;
+            text-align: center;
+        }
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+    <h1>📋 Marketing Campaign Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Channel</th>
+                <th>Spend</th>
+                <th>Clicks</th>
+                <th>Impressions</th>
+                <th>Revenue</th>
+                <th>CTR</th>
+                <th>ROI</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in records %}
+            <tr>
+                <td>{{ r.id }}</td>
+                <td>{{ r.channel }}</td>
+                <td>{{ r.spend }}</td>
+                <td>{{ r.clicks }}</td>
+                <td>{{ r.impressions }}</td>
+                <td>{{ r.revenue }}</td>
+                <td>{{ r.ctr }}</td>
+                <td>{{ r.roi }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
